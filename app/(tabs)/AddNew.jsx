@@ -1,12 +1,10 @@
+
 import { View, Text, StyleSheet } from "react-native";
-import Entypo from '@expo/vector-icons/Entypo';
-import { Redirect } from "expo-router";
-export default function Home() {
+
+export default function AddNew() {
   return (
     <View style={styles.center}>
-      <Entypo name="home" size={24} color="black" />
-      <Text style={styles.text}>Welcome to the Home Screen</Text>
-      <Redirect href={'login'}/>
+      <Text style={styles.text}>Add New Content Here</Text>
     </View>
   );
 }
