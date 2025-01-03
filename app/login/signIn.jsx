@@ -25,6 +25,7 @@ const signin = () => {
             borderColor:'black',
             margin:35,
             padding:15,
+            fontFamily:'Arial',
             borderRadius:10,
             borderWidth:1
           }}  onPress={() => { } } >Login</Text>
