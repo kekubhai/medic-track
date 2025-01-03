@@ -1,10 +1,15 @@
-import { View, Text,TextInput } from 'react-native'
+import { View, Text,TextInput, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { Button } from 'react-native'
+import { useRouter } from 'expo-router'
 
 const signin = () => {
+  const router=useRouter();
   return (
-    <View>
+    <View style={{
+        backgroundColor:'black',
+        width:'100%',
+        height:'100%',
+    }}>
           
           <Text style={{
             fontSize:30,
@@ -15,32 +20,38 @@ const signin = () => {
             fontSize:20,
           }}>Please sign in to continue</Text>
           <TextInput placeholder="Email" style=
-          {{ height: 40,margin:20, borderColor: 'gray', borderWidth: 1, marginBottom: 10,paddingLeft:20,borderRadius:20 ,backgroundColor:'white'}} />
-          <TextInput placeholder="Password" secureTextEntry={true} style={{ height: 40,marginTop:2, borderColor: 'gray', borderWidth: 1, marginBottom: 10,paddingLeft:20,borderRadius:20 ,backgroundColor:'white',margin:20}} />
+          {{ height: 40,margin:20, borderColor: 'gray', borderWidth: 1, marginBottom: 10,paddingLeft:20,borderRadius:2,backgroundColor:'white'}} />
+          <TextInput placeholder="Password" secureTextEntry={true} style={{ height: 40,marginTop:2, borderColor: 'gray', borderWidth: 1, marginBottom: 10,paddingLeft:20,borderRadius:2 ,backgroundColor:'white',margin:20}} />
           <Text style={{
             borderRadius:20,
+            marginTop:20,
             backgroundColor:'gray',
             textAlign:'center',
             color:'white',
             borderColor:'black',
-            margin:35,
+            marginLeft:35,
+            marginRight:35,
             padding:15,
             fontFamily:'Arial',
             borderRadius:10,
             borderWidth:1
           }}  onPress={() => { } } >Login</Text>
+          <TouchableOpacity onPress={()=>router.push('login/signUp')}>
+        
             <Text style={{
-            borderRadius:20,
-            backgroundColor:'white',
-            textAlign:'center',
-            color:'blue',
-            borderColor:'blue',
-            margin:35,
-            marginTop:10,
-            padding:15,
+              borderRadius:20,
+              backgroundColor:'white',
+              textAlign:'center',
+              color:'blue',
+              borderColor:'blue',
+              marginLeft:35,
+              marginTop:20,
+              padding:15,
             borderRadius:10,
-            borderWidth:1
-          }}  onPress={() => { } } >SignIn</Text>
+            borderWidth:1,
+            marginRight:35,
+          }}>Create Account</Text>
+          </TouchableOpacity>
     </View>
   )
 }
