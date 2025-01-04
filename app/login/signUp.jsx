@@ -1,12 +1,47 @@
-import { View, Text,TextInput, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { View, Text,TextInput, TouchableOpacity, ToastAndroid } from 'react-native'
+import React, { useState } from 'react'
 import { useRouter } from 'expo-router'
+import { createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase/auth'
+import { auth } from '../../config/firebaseconfig'
+import { setLocakStorage } from '../../service/Storage'
 
 
 
 
-const signin = () => {
+export default function signUp  () {
   const router=useRouter();
+  const auth=getAuth();
+  const [email,setEmail]=useState('');
+  const [password,setPassword]=useState('');
+  const[username,setUsername]=useState('');
+  const onCreateAccount=()=>{
+    if(!email || !password ||! username){
+      ToastAndroid.show('Please enter email and password',ToastAndroid.CENTER)
+      return;
+    }
+    createUserWithEmailAndPassword(auth, email, password)
+  .then(async(userCredential) => {
+    
+    const user = userCredential.user;
+     updateProfile(user,{
+      displayName:username
+    })
+
+    await  setLocakStorage('userDetail',user);
+    router.push('(tabs)')
+
+
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorCode,errorMessage);
+    if(errorCode==='auth/email-already-in-use'){
+      ToastAndroid.show('Email already in use',ToastAndroid.BOTTOM)
+    }
+    // ..
+  });
+  }
   return (
     <View style={{
         backgroundColor:'black',
@@ -15,8 +50,9 @@ const signin = () => {
     }}>
       <Text style={{ fontSize: 30, color: 'white',textAlign:'center',padding:10 }}>Welcome to Medic Track</Text>
       <Text style={{ color: 'white', fontSize: 20,textAlign:'center'}}>Please sign in to continue</Text>
-      
+      <Text>Full Name</Text>
       <TextInput 
+      onChangeText={(value)=>setUsername(value)}
         placeholder="Full Name" 
         style={{ 
           height: 40, 
@@ -30,21 +66,26 @@ const signin = () => {
           color:'black'
         }} 
       />
-      <TextInput 
-        placeholder="Email" 
-        style={{ 
-          height: 40, 
-          marginTop: 2, 
-          borderColor: 'gray', 
-          borderWidth: 1, 
-          marginBottom: 10, 
-          paddingLeft: 20, 
-          borderRadius: 2, 
-          backgroundColor: 'white', 
-          margin: 20
-        }} 
+      <View>
+
+    <Text>Email</Text>
+      <TextInput placeholder='Email' style={{
+           marginTop: 2, 
+           borderColor: 'gray', 
+           borderWidth: 1, 
+           marginBottom: 10, 
+           paddingLeft: 20, 
+           borderRadius: 2, 
+           backgroundColor: 'white', 
+           margin: 20
+
+      }}
+      onChangeText={(value)=>setEmail(value)}
       />
+      </View>
+
       <TextInput 
+      onChangeText={(value)=>setPassword(value)}
         placeholder="Password" 
         secureTextEntry={true} 
         style={{ 
@@ -58,10 +99,11 @@ const signin = () => {
           backgroundColor: 'white', 
           margin: 20
         }} 
+        
       />
      
       <TouchableOpacity 
-        onPress={() => router.push('login/signUp')}
+      onPress={onCreateAccount}
         style={{
           borderRadius: 2,
           backgroundColor: 'white',
@@ -101,5 +143,3 @@ const signin = () => {
     </View>
   )
 }
-
-export default signin

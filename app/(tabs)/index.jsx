@@ -1,12 +1,16 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Button } from "react-native";
 import Entypo from '@expo/vector-icons/Entypo';
 import { Redirect } from "expo-router";
+import { signOut } from "firebase/auth";
+import { auth } from "../../config/firebaseconfig";
+
 export default function Home() {
   return (
-    <View style={styles.center}>
-      <Entypo name="home" size={24} color="black" />
-      <Text style={styles.text}>Welcome to the Home Screen</Text>
-      <Redirect href={'login'}/>
+    <View style={{
+      padding:20,
+      backgroundColor:'violet'
+    }}>
+     
     </View>
   );
 }
