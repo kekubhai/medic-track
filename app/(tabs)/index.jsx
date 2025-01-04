@@ -3,6 +3,7 @@ import Entypo from '@expo/vector-icons/Entypo';
 import { Redirect } from "expo-router";
 import { signOut } from "firebase/auth";
 import { auth } from "../../config/firebaseconfig";
+import Header from "../../components/Header";
 
 export default function Home() {
   return (
@@ -10,7 +11,7 @@ export default function Home() {
       padding:20,
       backgroundColor:'violet'
     }}>
-     
+     <Header/>
     </View>
   );
 }
