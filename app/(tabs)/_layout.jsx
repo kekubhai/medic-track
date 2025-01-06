@@ -1,7 +1,7 @@
 import { Tabs, useRouter } from "expo-router";
 import Entypo from '@expo/vector-icons/Entypo';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import { auth } from "../../config/firebaseconfig";
+import { auth} from "../../config/firebase"
 import { getAuth,onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { getLocalStorage } from "../../service/Storage";

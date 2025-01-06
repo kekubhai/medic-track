@@ -2,7 +2,7 @@ import { View, Text,TextInput, TouchableOpacity, ToastAndroid } from 'react-nati
 import React, { useState } from 'react'
 import { useRouter } from 'expo-router'
 import { createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase/auth'
-import { auth } from '../../config/firebaseconfig'
+import { auth } from '../../config/firebase'
 import { setLocakStorage } from '../../service/Storage'
 
 

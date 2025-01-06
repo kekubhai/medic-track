@@ -3,7 +3,7 @@ import React from 'react'
 import { useState } from 'react';
 import { useRouter } from 'expo-router'
 import { getAuth } from 'firebase/auth';
-import {auth} from '../../config/firebaseconfig'
+import {auth} from '../../config/firebase'
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { setLocakStorage } from '../../service/Storage';
 
