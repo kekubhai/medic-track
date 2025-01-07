@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { getLocalStorage } from '../service/Storage'
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Colors from '../Constant/Colors';
+import EmptyState from './EmptyState';
 
 const Header = () => {
   const [user,setUser]=useState();
@@ -48,6 +49,7 @@ const Header = () => {
     display:'flex',
     padding:5,
   }} name="setting" size={34} color={Colors.PRIMARY} />
+  
     </View>
   )
 }

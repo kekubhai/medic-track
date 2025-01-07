@@ -4,6 +4,7 @@ import { Redirect } from "expo-router";
 import { signOut } from "firebase/auth";
 import { auth} from "../../config/firebase"
 import Header from "../../components/Header";
+import EmptyState from "../../components/EmptyState";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       height:'200%',
     }}>
      <Header/>
+     <EmptyState/>
     </View>
   );
 }
