@@ -1,25 +1,39 @@
-import { View, Text ,StyleSheet} from 'react-native'
-import React from 'react'
+import { View, Text ,StyleSheet, TouchableOpacity} from 'react-native'
+import React, { useState } from 'react'
 import { Ionicons } from '@expo/vector-icons'
 import { TextInput } from 'react-native'
 import { FlatList } from 'react-native'
 import { TypeList } from '../Constant/Options'
 export default function AddMedicationForm  () {
+  const [formdata,setFormData]=useState();
+  const onHandleData=(field,value)=>{
+    setFormData(prev=>({
+      ...prev,
+      [field]:value
+    }))
+  }
   return (
     <View  style={{
         padding:25,
     }}>
       <Text>AddMedicationForm</Text>
-      <View style={styles.inputGroups}>
+      <TouchableOpacity style={styles.inputGroups}>
         <Ionicons style={styles.icon} name='medkit-outline' size={24 } color={'black'}/>
-        <TextInput style={styles.textinput} placeholder='Medicine name'/>
+        <TextInput onChange={onHandleData('name',value)} style={styles.textinput} placeholder='Medicine name'/>
+      </TouchableOpacity>
+     <FlatList data={TypeList}
+     horizontal
+     styles={{
+      marginTop:15,
+     }}
+     showsHorizontalScrollIndicator={false}
+     renderItem={({item,index})=>(
+      <View style={[styles.inputGroups,{marginRight:10}]}>
+        <Text style={styles.typeList}>{item.name}</Text>
       </View>
-      <FlatList data={TypeList}
-      renderItem={({item,index})=>{
-        <View>
-            <Text>{item.name}</Text>
-        </View>
-      }}></FlatList>
+     )}>
+
+     </FlatList>
     </View>
   )
 }
@@ -49,5 +63,8 @@ const styles=StyleSheet.create({
         borderRightWidth:1,
         paddingRight:12,
         borderColor:'gray'
+    },typeList:{
+    fontSize:16,
+
     }
 })
