@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Modal, TouchableOpacity, TextInput, FlatList } from 'react-native';
+import { View, Text, StyleSheet, Modal, TouchableOpacity, TextInput, FlatList, ScrollView } from 'react-native';
 import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { TypeList } from '../Constant/Options';
@@ -10,6 +10,8 @@ export default function AddMedicationForm() {
   const [dateModalVisible, setDateModalVisible] = useState(false);
   const [isStartDate, setIsStartDate] = useState(true); // To distinguish between start and end date
   const [selectedOption, setSelectedOption] = useState('');
+  const [showTimePicker,setshowTimePicker]=useState(false);
+  
   const options = ['Morning', 'Afternoon', 'Evening', 'Night'];
 
   const handleOptionSelect = (option) => {
@@ -63,7 +65,7 @@ export default function AddMedicationForm() {
   );
 
   return (
-    <View style={{ padding: 25 }}>
+    <ScrollView style={{ padding: 25 }}>
       <Text style={styles.header}>Add Medication Form</Text>
 
       {/* Medicine Name Input */}
@@ -158,22 +160,30 @@ export default function AddMedicationForm() {
 
       }}>
 
-      <TouchableOpacity
-          style={[styles.inputGroups,]}
-          onPress={() => {
-            setIsStartDate(true);
-            setDateModalVisible(true);
-          }}
-          >
-          <Ionicons style={styles.icon} name="timer-outline" size={24} color="blue" />
-          <Text style={styles.textinput}>
-            {formdata.startDate ? formdata.startDate.toDateString() : 'Select Reminder Time'}
-          </Text>
-        </TouchableOpacity>
-          </View>
-          
+<TouchableOpacity
+      style={styles.button}   
+  onPress={() => {
+   
+   setshowTimePicker(true);
+  }}
+>
+  <Ionicons
+    style={styles.icon}
+    name="alarm-outline"
+    size={24}
+    color="blue"
+  />
+  <Text style={styles.textinput}>
+    {formdata.reminderDate
+      ? formdata.reminderDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      : 'Set Reminder Time'}
+  </Text>
+</TouchableOpacity>
 
-    </View>
+          </View>
+     {showTimePicker&&  <RNDateTimePicker value={formdata?.reminder??new Date()}/>   
+}
+    </ScrollView>
   );
 }
 
@@ -234,4 +244,11 @@ const styles = StyleSheet.create({
   optionText: {
     fontSize: 16,
   },
+  button:{
+    padding:15,
+    margin:5,
+    backgroundColor:'gray',
+    borderRadius:15,
+    width:'100%',
+  }
 });
