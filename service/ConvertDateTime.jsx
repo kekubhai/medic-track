@@ -1,1 +1,3 @@
-export const Format
+export const FormatData= (timestamp)=>{
+     
+}

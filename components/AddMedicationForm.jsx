@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, Modal, TouchableOpacity, TextInput, FlatList } 
 import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { TypeList } from '../Constant/Options';
+import RNDateTimePicker from '@react-native-community/datetimepicker';
 
 export default function AddMedicationForm() {
   const [formdata, setFormData] = useState({});
@@ -151,8 +152,27 @@ export default function AddMedicationForm() {
         </TouchableOpacity>
       </View>
 
-      {/* Render Date Modal */}
+      
       {renderDateModal()}
+      <View style={{
+
+      }}>
+
+      <TouchableOpacity
+          style={[styles.inputGroups,]}
+          onPress={() => {
+            setIsStartDate(true);
+            setDateModalVisible(true);
+          }}
+          >
+          <Ionicons style={styles.icon} name="timer-outline" size={24} color="blue" />
+          <Text style={styles.textinput}>
+            {formdata.startDate ? formdata.startDate.toDateString() : 'Select Reminder Time'}
+          </Text>
+        </TouchableOpacity>
+          </View>
+          
+
     </View>
   );
 }
