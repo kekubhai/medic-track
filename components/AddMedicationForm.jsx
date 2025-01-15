@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Modal, TouchableOpacity, TextInput, FlatList, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Modal, TouchableOpacity, TextInput, FlatList, ScrollView, Alert } from 'react-native';
 import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { TypeList } from '../Constant/Options';
@@ -19,7 +19,13 @@ export default function AddMedicationForm() {
     setFormData((prev) => ({ ...prev, time: option }));
     setModalVisible(false);
   };
-
+ const Savedmedication=()=>{
+  const docId=Date.now()
+.toString();
+//if(!(formdata?.name || formdata?.type || formdata?.dose || formdata?.)){
+  Alert.alert("Enter all the data field")
+}
+}
   const onHandleData = (field, value) => {
     setFormData((prev) => ({
       ...prev,
@@ -251,7 +257,7 @@ const styles = StyleSheet.create({
     color:'black',
     padding:15,
     margin:5,
-    backgroundColor:'gray',
+    backgroundColor:'cornflowerblue',
     borderRadius:15,
     width:'100%',
   },
