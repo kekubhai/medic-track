@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, Modal, TouchableOpacity, TextInput, FlatList, ScrollView, Alert } from 'react-native';
 import React, { useState } from 'react';
+import { db } from '../config/firebase';
 import { Ionicons } from '@expo/vector-icons';
 import { TypeList } from '../Constant/Options';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
@@ -8,7 +9,7 @@ export default function AddMedicationForm() {
   const [formdata, setFormData] = useState({});
   const [isModalVisible, setModalVisible] = useState(false);
   const [dateModalVisible, setDateModalVisible] = useState(false);
-  const [isStartDate, setIsStartDate] = useState(true); // To distinguish between start and end date
+  const [isStartDate, setIsStartDate] = useState(true); 
   const [selectedOption, setSelectedOption] = useState('');
   const [showTimePicker,setshowTimePicker]=useState(false);
   
@@ -19,11 +20,23 @@ export default function AddMedicationForm() {
     setFormData((prev) => ({ ...prev, time: option }));
     setModalVisible(false);
   };
- const Savedmedication=()=>{
+ const Savedmedication=async()=>{
+  const user=await getLocalStorage('userDetails')
   const docId=Date.now()
 .toString();
-//if(!(formdata?.name || formdata?.type || formdata?.dose || formdata?.)){
-  Alert.alert("Enter all the data field")
+if(!(formdata?.name || formdata?.type || formdata?.dose|| formdata?.reminder || formdata?.endDate || formdata?.startDate )){
+  Alert.alert("Enter all the data field");
+  return ;
+}
+try {
+  await setDoc(doc(db,'medication',docId),{
+...formdata,
+userEmail,
+docId:docId,
+})
+console.log('date saved')
+} catch (e) {
+  console.log(e)
 }
 }
   const onHandleData = (field, value) => {

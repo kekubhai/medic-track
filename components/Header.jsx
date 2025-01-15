@@ -12,7 +12,7 @@ const Header = () => {
   },[])
   const GetUserDetails=async()=>{
     const userInfo=await getLocalStorage('userDetail')
-    console.log(userInfo);
+    
     setUser(userInfo);
  
   }
