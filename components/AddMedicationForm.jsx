@@ -161,7 +161,7 @@ export default function AddMedicationForm() {
       }}>
 
 <TouchableOpacity
-      style={styles.button}   
+      style={{}}   
   onPress={() => {
    
    setshowTimePicker(true);
@@ -173,7 +173,7 @@ export default function AddMedicationForm() {
     size={24}
     color="blue"
   />
-  <Text style={styles.textinput}>
+  <Text style={styles.inputGroups}>
     {formdata.reminderDate
       ? formdata.reminderDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       : 'Set Reminder Time'}
@@ -183,6 +183,9 @@ export default function AddMedicationForm() {
           </View>
      {showTimePicker&&  <RNDateTimePicker value={formdata?.reminder??new Date()}/>   
 }
+<TouchableOpacity style={styles.button}>
+  <Text style={styles.buttonText}> Add New medication</Text>
+</TouchableOpacity>
     </ScrollView>
   );
 }
@@ -217,7 +220,7 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: 'white',
     borderColor: 'gray',
-    borderWidth: 1,
+    
     marginVertical: 10,
   },
   dropdownText: {
@@ -245,10 +248,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   button:{
+    color:'black',
     padding:15,
     margin:5,
     backgroundColor:'gray',
     borderRadius:15,
     width:'100%',
+  },
+  buttonText:{
+    fontSize:17,
+    color:'black',
+    textAlign:"center",
   }
 });
